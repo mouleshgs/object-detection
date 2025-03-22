@@ -8,6 +8,7 @@ cap = cv.VideoCapture(0)
 model = YOLO('yolov8n.pt')
 
 
+
 while True:
     res, frame = cap.read()
 
@@ -17,7 +18,10 @@ while True:
     gray_frame = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
     
     results = model(frame)
+    confidence = results[0].boxes[0].conf.item()
+
     annotation_frame = results[0].plot()
+
     cv.imshow("camera", annotation_frame)
 
 
